@@ -15,8 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+from rest_framework.schemas import get_schema_view
+
+
+# Variable donde se realiza la descripción de la documentación.
+description='''<h2>Documentación general de APIs de la aplicación e-commerce</h2>'''
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('e-commerce/',include('e_commerce.api.urls')),
+    path('e-commerce/',include('apps.e_commerce.api.urls')),
+    
+    #  Route TemplateView to serve Swagger UI template.
+    #   * Provide `extra_context` with view name of `SchemaView`.
+    path('api-docs/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
+    
+    path('openapi', get_schema_view(
+        title="Marvel e-commerce",
+        description=description,
+        version="1.0.0"
+    ), name='openapi-schema'),
 ]

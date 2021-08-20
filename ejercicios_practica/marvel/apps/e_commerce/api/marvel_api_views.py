@@ -1,5 +1,5 @@
 # Import models:
-from e_commerce.models import *
+from apps.e_commerce.models import *
 
 from marvel.settings import VERDE, CIAN, AMARILLO
 from django.http import HttpResponse
@@ -10,11 +10,14 @@ import hashlib
 
 # NOTE: Declaramos las variables que tienen que ver con la API KEY de Marvel:
 
-PUBLIC_KEY = '58ee40376f7c10e99f440f5e3abd2caa'
-PRIVATE_KEY = '2c0373e00d85edb4560f68ddc2094014e8694f90'
+# AUTHORIZING AND SIGNING REQUESTS:
+PUBLIC_KEY = '2155d3484959d692ee57107833220e88'
+PRIVATE_KEY = 'ef5564b7ab99468f30662443281847d7fe6615e6'
 TS = 1
-TO_HASH = str(TS)+PRIVATE_KEY+PUBLIC_KEY
+    
+TO_HASH = str(TS) + PRIVATE_KEY + PUBLIC_KEY 
 HASHED = hashlib.md5(TO_HASH.encode())
+
 URL_BASE = 'http://gateway.marvel.com/v1/public/'
 ENDPOINT = 'comics'
 PARAMS = dict(ts=TS, apikey=PUBLIC_KEY, hash=HASHED.hexdigest())

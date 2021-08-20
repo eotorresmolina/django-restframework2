@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Local apps: Acá ponemos el nombre de las carpetas de nuestras aplicaciones
-    'e_commerce',
+    'apps.e_commerce',
     # Third party apps: acá vamos agregando las aplicaciones de terceros, extensiones de Django.
     'rest_framework',
     'rest_framework.authtoken',
@@ -75,7 +75,7 @@ ROOT_URLCONF = 'marvel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Le agrego el path donde va a estar mis templates.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
